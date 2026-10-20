@@ -57,21 +57,21 @@
         </div>
         @if($auction->isClosed())
             <div class="rounded-2xl bg-rose-50 p-4 dark:bg-rose-950/30">
-                <div class="grid grid-cols-3 gap-3 text-center">
-                    <div><p class="text-xs text-rose-500">Final bid</p><p class="font-black">${{ number_format($auction->finalBidAmount(), 2) }}</p></div>
-                    <div><p class="text-xs text-rose-500">Bids</p><p class="font-black">{{ $auction->bids_count ?? $auction->bids()->count() }}</p></div>
-                    <div><p class="text-xs text-rose-500">Winner</p><p class="truncate font-black">{{ $auction->winningUser()?->name ?? 'No bids' }}</p></div>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex flex-col items-center"><p class="text-[11px] uppercase tracking-wider text-rose-500">Final bid</p><p class="font-black whitespace-nowrap">${{ number_format($auction->finalBidAmount(), 2) }}</p></div>
+                    <div class="flex flex-col items-center"><p class="text-[11px] uppercase tracking-wider text-rose-500">Bids</p><p class="font-black whitespace-nowrap">{{ $auction->bids_count ?? $auction->bids()->count() }}</p></div>
+                    <div class="flex flex-col items-center max-w-[100px]"><p class="text-[11px] uppercase tracking-wider text-rose-500">Winner</p><p class="truncate font-black w-full text-center" title="{{ $auction->winningUser()?->name ?? 'No bids' }}">{{ $auction->winningUser()?->name ?? 'None' }}</p></div>
                 </div>
                 <p class="mt-3 rounded-xl bg-white/70 px-3 py-2 text-center text-xs font-bold text-rose-700 dark:bg-white/10 dark:text-rose-200">Auction Ended</p>
             </div>
             <a href="{{ route('auctions.show', $auction) }}" class="mt-5 block rounded-2xl bg-slate-950 px-5 py-3 text-center text-sm font-black text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-800 dark:bg-white dark:text-slate-950">View Result</a>
         @else
-            <div class="grid grid-cols-3 gap-3 rounded-2xl bg-slate-50 p-3 text-center dark:bg-slate-900/80">
-                <div><p class="text-xs text-slate-500">Bid</p><p class="font-black">${{ $auction->displayPrice() }}</p></div>
-                <div><p class="text-xs text-slate-500">Bids</p><p class="font-black">{{ $auction->bids_count ?? $auction->bids()->count() }}</p></div>
-                <div>
-                    <p class="text-xs text-slate-500">{{ $auction->isUpcoming() ? 'Starts' : 'Time' }}</p>
-                    <p class="font-black" data-countdown="{{ $auction->countdownTarget()->toIso8601String() }}">Live</p>
+            <div class="flex items-center justify-between gap-2 rounded-2xl bg-slate-50 p-4 dark:bg-slate-900/80">
+                <div class="flex flex-col items-center"><p class="text-[11px] uppercase tracking-wider text-slate-500">Bid</p><p class="font-black whitespace-nowrap">${{ $auction->displayPrice() }}</p></div>
+                <div class="flex flex-col items-center"><p class="text-[11px] uppercase tracking-wider text-slate-500">Bids</p><p class="font-black whitespace-nowrap">{{ $auction->bids_count ?? $auction->bids()->count() }}</p></div>
+                <div class="flex flex-col items-center">
+                    <p class="text-[11px] uppercase tracking-wider text-slate-500">{{ $auction->isUpcoming() ? 'Starts' : 'Time' }}</p>
+                    <p class="font-black whitespace-nowrap" data-countdown="{{ $auction->countdownTarget()->toIso8601String() }}">Live</p>
                 </div>
             </div>
             <a href="{{ route('auctions.show', $auction) }}" class="mt-5 block rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-center text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:from-cyan-400 hover:to-blue-500">{{ $auction->isUpcoming() ? 'Preview Auction' : 'Bid Now' }}</a>

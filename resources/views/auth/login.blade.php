@@ -8,6 +8,21 @@
             @csrf
             <p class="text-sm font-bold uppercase tracking-[0.25em] text-cyan-600 dark:text-cyan-300">{{ ($heading ?? 'Login') === 'Admin Login' ? 'Secure admin access' : 'Welcome back' }}</p>
             <h1 class="mt-2 text-3xl font-black">{{ $heading ?? 'Login' }}</h1>
+            @if(session('error'))
+                <div class="mb-4 rounded-2xl bg-rose-50 border border-rose-200 px-4 py-3 text-sm font-semibold text-rose-700 dark:bg-rose-950/40 dark:border-rose-800 dark:text-rose-300">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div class="mb-4 rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-300">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="mb-4 rounded-2xl bg-rose-50 border border-rose-200 px-4 py-3 text-sm font-semibold text-rose-700 dark:bg-rose-950/40 dark:border-rose-800 dark:text-rose-300">
+                    {{ $errors->first() }}
+                </div>
+            @endif
             <div class="mt-6 space-y-4">
                 <div>
                     <label class="text-sm font-bold">Email</label>

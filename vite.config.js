@@ -6,8 +6,18 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+            refresh: [
+                'resources/views/**',
+                'routes/**',
+                'app/Http/Controllers/**',
+            ],
         }),
         tailwindcss(),
     ],
+    server: {
+        hmr: {
+            // Disable cross-tab full-reload broadcast on navigation
+            overlay: false,
+        },
+    },
 });

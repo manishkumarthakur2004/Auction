@@ -163,6 +163,10 @@
                         @endif
                     </a>
                     <a href="{{ route('sell-requests.create') }}" class="rounded-2xl bg-slate-950 px-4 py-3 font-semibold text-white">Sell Item</a>
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full rounded-2xl px-4 py-3 text-left font-semibold text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30">Logout</button>
+                    </form>
                 @else
                     <a href="{{ route('user.login') }}" class="rounded-2xl px-4 py-3 font-semibold hover:bg-slate-100 dark:hover:bg-white/10">Login</a>
                     <a href="{{ route('user.register') }}" class="rounded-2xl bg-blue-600 px-4 py-3 font-semibold text-white">Join Free</a>

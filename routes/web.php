@@ -53,7 +53,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth:web')->group(function () {
     Route::post('user/logout', [AuthenticatedSessionController::class, 'destroy'])->name('user.logout');
+    Route::get('user/logout', [AuthenticatedSessionController::class, 'destroy']);
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy']);
     Route::redirect('dashboard', '/user/dashboard');
     Route::get('user/dashboard', DashboardController::class)->name('dashboard');
     Route::get('user/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -73,6 +75,7 @@ Route::middleware('auth:web')->group(function () {
 
 Route::middleware(['auth:admin', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'adminDestroy'])->name('logout');
+    Route::get('logout', [AuthenticatedSessionController::class, 'adminDestroy']);
     Route::redirect('/', '/admin/dashboard');
     Route::get('dashboard', AdminDashboardController::class)->name('dashboard');
     Route::resource('users', AdminUserController::class)->only(['index', 'update', 'destroy']);

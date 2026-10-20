@@ -16,7 +16,7 @@
                 <form class="space-y-4">
                     <div>
                         <label class="text-sm font-bold">Search</label>
-                        <input name="search" value="{{ request('search') }}" class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-cyan-500 dark:border-white/10 dark:bg-slate-900" placeholder="Watch, laptop, art">
+                        <input name="search" value="{{ request('search') }}" class="mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 placeholder-slate-400 outline-none focus:border-cyan-500 dark:border-white/10 dark:bg-slate-900 dark:placeholder-slate-500" placeholder="Watch, laptop, art">
                     </div>
                     <div>
                         <label class="text-sm font-bold">Category</label>
@@ -37,8 +37,8 @@
                         </select>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <input name="min_price" value="{{ request('min_price') }}" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-white/10 dark:bg-slate-900" placeholder="Min">
-                        <input name="max_price" value="{{ request('max_price') }}" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 dark:border-white/10 dark:bg-slate-900" placeholder="Max">
+                        <input name="min_price" value="{{ request('min_price') }}" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 placeholder-slate-400 dark:border-white/10 dark:bg-slate-900 dark:placeholder-slate-500" placeholder="Min">
+                        <input name="max_price" value="{{ request('max_price') }}" class="rounded-2xl border border-slate-200 bg-white px-4 py-3 placeholder-slate-400 dark:border-white/10 dark:bg-slate-900 dark:placeholder-slate-500" placeholder="Max">
                     </div>
                     <button class="w-full rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-black text-white">Apply Filters</button>
                 </form>

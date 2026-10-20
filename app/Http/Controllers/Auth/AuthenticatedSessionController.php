@@ -8,24 +8,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('auth.login', [
-            'title' => 'User Login',
-            'action' => route('user.login.store'),
-            'registerRoute' => route('user.register'),
-            'heading' => 'User Login',
-        ]);
+        return response()
+            ->view('auth.login', [
+                'title'         => 'User Login',
+                'action'        => route('user.login.store'),
+                'registerRoute' => route('user.register'),
+                'heading'       => 'User Login',
+            ])
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
-    public function adminCreate()
+    public function adminCreate(Request $request)
     {
-        return view('auth.login', [
-            'title' => 'Admin Login',
-            'action' => route('admin.login.store'),
-            'registerRoute' => null,
-            'heading' => 'Admin Login',
-        ]);
+        return response()
+            ->view('auth.login', [
+                'title'         => 'Admin Login',
+                'action'        => route('admin.login.store'),
+                'registerRoute' => null,
+                'heading'       => 'Admin Login',
+            ])
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function store(Request $request)
@@ -67,13 +75,14 @@ class AuthenticatedSessionController extends Controller
 
         $dashboardRoute = $adminOnly ? route('admin.dashboard') : route('dashboard');
 
-        return redirect()->intended($dashboardRoute);
+        return redirect($dashboardRoute);
     }
 
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 
+        $request->session()->regenerate();
         $request->session()->regenerateToken();
 
         return redirect()->route('user.login')->with('success', 'You have been logged out.');
@@ -83,6 +92,7 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('admin')->logout();
 
+        $request->session()->regenerate();
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login')->with('success', 'Admin logged out.');

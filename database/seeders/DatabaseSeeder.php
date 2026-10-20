@@ -155,5 +155,8 @@ class DatabaseSeeder extends Seeder
                 'reviewed_at' => $index >= 5 ? now()->subHours(random_int(2, 24)) : null,
             ]);
         }
+
+        // Add our 70 realistic auctions
+        $this->call(SeventyAuctionsSeeder::class);
     }
 }
